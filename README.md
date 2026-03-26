@@ -3,10 +3,11 @@
 A robust Python script to automatically scrape internship and job listings directly from Internshala.
 
 ## 🚀 Features
-* **Automated Pagination:** Seamlessly navigates through Internshala's pages to collect job cards (currently optimized to scrape the first 5 pages).
+* **Automated Pagination:** Seamlessly navigates through Internshala's pages to collect job cards (currently set to scrape the first page).
 * **Data Points Extracted:** 
   * Job Title
   * Location
+  * Experience Required
   * Required Skills
   * Salary / Stipend
   * Direct Application URL
@@ -34,8 +35,6 @@ python internshala.py
 The script will begin printing logs to the terminal as it navigates each page:
 ```text
 Scraping: https://internshala.com/internships/
-Scraping: https://internshala.com/internships/page-2/
-...
 ✅ Data saved to Internshala_Jobs.xlsx
 ```
 

@@ -22,18 +22,23 @@ def scrape_page(job_cards):
         except Exception:
             title = ""
 
-        # Location
+        # Location (Drilling down to the anchor tag)
         try:
-            location = job.find("a", class_="location_link").text.strip()
+            # Find the p tag, then the span, then the 'a' tag specifically
+            location = job.find("p", class_="locations").find("span").find("a").get_text(strip=True)
         except Exception:
-            location = ""
-
-        # Experience (Internshala usually doesn't show directly)
-        experience = ""
+            location = "Work from home"
+        
+        # Experience
+        try:
+            experience_div = job.find("div", class_="job-experience-item")
+            experience = experience_div.find("div", class_="item_body").get_text(strip=True) if experience_div else "Not Specified"
+        except Exception:
+            experience = "Not Specified"
 
         # Skills Required
         try:
-            skills_section = job.find("div", class_="internship_other_details_container")
+            skills_section = job.find("div", class_="job_skill")
             skills = skills_section.text.strip() if skills_section else ""
         except Exception:
             skills = ""
@@ -83,7 +88,7 @@ def scrape_all_pages():
 
     page_number = 1
 
-    while page_number <= 5:
+    while page_number <= 1:
 
         if page_number == 1:
             url = BASE_URL
@@ -137,3 +142,4 @@ if __name__ == "__main__":
             print(f"❌ Failed to save data: {e}")
     else:
         print("⚠️ No data was scraped.")
+        
